@@ -3,4 +3,10 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+
+
+    <string name="CLIENT_ID">a6f624381e5e4a9282e9a66161599b28</string>
+    <string name="CLIENT_SECRET">566d927f92e046b7b3c1fed4d3dbbd2a</string>
+
+
 </resources>
