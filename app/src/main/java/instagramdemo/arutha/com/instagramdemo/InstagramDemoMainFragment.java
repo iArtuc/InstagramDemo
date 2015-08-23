@@ -1,10 +1,15 @@
 package instagramdemo.arutha.com.instagramdemo;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 
 import instagramdemo.arutha.com.CustomComponents.InstagramCustomDialog;
+import instagramdemo.arutha.com.InstagramAuthorize.InstagramAutho;
 import instagramdemo.arutha.com.InstagramEnums.dialogTypeEnum;
+import instagramdemo.arutha.com.InstagramEnums.mainPageEnum;
 import instagramdemo.arutha.com.flows.BusinessService;
 import instagramdemo.arutha.com.flows.InstagramApplication;
 import instagramdemo.arutha.com.flows.InstagramMainPageFlow;
@@ -64,10 +69,56 @@ public class InstagramDemoMainFragment extends BaseActivity {
 
     }
 
+    private void changeFragment(mainPageEnum enumItem) {
+
+        Fragment fr;
+        FragmentTransaction fragmentTransaction;
+        FragmentManager fm;
+        Bundle bundle;
+        switch (enumItem) {
+            case GetToken:
+                fr = new InstagramAutho();
+                fm = getSupportFragmentManager();
+//                bundle = new Bundle();
+//                bundle.putLong("PoliceNo", police);
+//                fr.setArguments(bundle);
+                fragmentTransaction = fm.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment_place, fr);
+                fm.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+
+                // fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+                break;
+            case InstagramMainPage:
+
+                fr = new InstagramMainPage();
+                fm = getSupportFragmentManager();
+//                bundle = new Bundle();
+//                bundle.putLong("PoliceNo", police);
+//                bundle.putLong("GrupNo", grup);
+//                fr.setArguments(bundle);
+                fragmentTransaction = fm.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment_place, fr);
+                fm.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+
+                // fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+
+                break;
+
+        }
+
+
+    }
+
 
     private void setPageToView() {
 
-        instagramMainPageFlow.hasToken();
+        if (instagramMainPageFlow.hasToken()) {
+            changeFragment(mainPageEnum.InstagramMainPage);
+        } else {
+            changeFragment(mainPageEnum.GetToken);
+        }
 
 
     }

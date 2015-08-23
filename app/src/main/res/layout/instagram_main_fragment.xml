@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/fragment_place"
-        android:name="instagramdemo.arutha.com.instagramdemo.InstagramDemoMainFragment"
+        android:name="instagramdemo.arutha.com.InstagramAuthorize.InstagramAutho"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

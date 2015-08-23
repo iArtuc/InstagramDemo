@@ -5,9 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
-import instagramdemo.arutha.com.InstagramAuthorize.MainActivity;
-import instagramdemo.arutha.com.flows.SharedPrefManager;
-
 /**
  * Created by ilkinartuc on 23/08/15.
  */
