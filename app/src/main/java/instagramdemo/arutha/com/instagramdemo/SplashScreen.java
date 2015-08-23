@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 
 import instagramdemo.arutha.com.InstagramAuthorize.MainActivity;
+import instagramdemo.arutha.com.flows.SharedPrefManager;
 
 /**
  * Created by ilkinartuc on 23/08/15.
@@ -32,8 +33,7 @@ public class SplashScreen extends Activity {
             public void run() {
                 // This method will be executed once the timer is over
                 // Start your app main activity
-
-                Intent i = new Intent(SplashScreen.this, MainActivity.class);
+                Intent i = new Intent(SplashScreen.this, InstagramDemoMainFragment.class);
                 // Intent i = new Intent(SplashScreen.this, graph.class);
                 startActivity(i);
 

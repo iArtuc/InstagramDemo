@@ -22,4 +22,6 @@ public class ApplicationConstants {
     public static final String API_NAME = "name";
     public static final String API_ACCESS_TOKEN = "access_token";
 
+    public static final boolean LOG = true;
+
 }

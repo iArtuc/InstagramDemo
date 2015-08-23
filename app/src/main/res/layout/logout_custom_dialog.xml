@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+
+    <instagramdemo.arutha.com.CustomComponents.InstagramTextView
+        android:id="@+id/textView_custom_dialog_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="50dp"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+        android:text="@string/logout_confirmation" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView_custom_dialog_message"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <RelativeLayout
+            android:id="@+id/RelativeCustomLogoutDialogCancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="3dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:background="@color/LightGrey">
+
+            <instagramdemo.arutha.com.CustomComponents.InstagramTextView
+                android:id="@+id/textViewLogoutDialogCancel"
+                style="@style/whiteTextView"
+                android:text="@string/cancel" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/RelativeCustomLogoutDialogOk"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:background="@color/Green">>
+
+            <instagramdemo.arutha.com.CustomComponents.InstagramTextView
+                android:id="@+id/textViewLogoutDialogOk"
+                style="@style/whiteTextView"
+                android:text="@string/confirm" />
+        </RelativeLayout>
+    </LinearLayout>
+
+
+</RelativeLayout>

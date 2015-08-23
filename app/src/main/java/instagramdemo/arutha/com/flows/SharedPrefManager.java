@@ -72,4 +72,8 @@ public class SharedPrefManager {
     private void setContext(Context context) {
         this.context = context;
     }
+
+    public boolean hasAccessToken() {
+        return (getAccessToken() == null) ? false : true;
+    }
 }
