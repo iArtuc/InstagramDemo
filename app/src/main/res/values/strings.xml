@@ -8,6 +8,7 @@
     <string name="logout_confirmation">Are you sure to log out</string>
     <string name="confirm">Okay</string>
     <string name="cancel">Cancel</string>
+    <string name="search">Search</string>
 
 
 </resources>

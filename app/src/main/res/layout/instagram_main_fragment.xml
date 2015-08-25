@@ -4,10 +4,32 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <fragment
-        android:id="@+id/fragment_place"
-        android:name="instagramdemo.arutha.com.InstagramAuthorize.InstagramAutho"
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_container_MainFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerViewMainFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="2.5dp"
+            android:paddingRight="2.5dp"
+            android:paddingTop="10dp" />
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+
+
+
+    <!--<View-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="150dp"></View>-->
+
+    <!--<fragment-->
+        <!--android:id="@+id/fragment_place"-->
+        <!--android:name="instagramdemo.arutha.com.instagramdemo.InstagramMainPage"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent" />-->
 
 </LinearLayout>

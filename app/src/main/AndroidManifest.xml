@@ -24,8 +24,13 @@
 
 
         <activity
-            android:name="instagramdemo.arutha.com.instagramdemo.InstagramDemoMainFragment"
+            android:name="instagramdemo.arutha.com.InstagramAuthorize.InstagramAutho"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/app_name" />
+
+        <activity
+            android:name="instagramdemo.arutha.com.instagramdemo.InstagramDemoMainFragment"
+            android:configChanges="keyboardHidden|orientation|screenSize" />
     </application>
 
 

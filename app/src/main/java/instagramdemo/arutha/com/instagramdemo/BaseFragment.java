@@ -19,6 +19,13 @@ public class BaseFragment extends Fragment {
 
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+
+
+    }
+
     public void showAHEDialog() {
 
         if (dialog == null) {

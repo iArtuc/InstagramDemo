@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/LightGreen">
+
+
+    <ImageView
+        android:id="@+id/actionBarBackImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:padding="10dp"
+        android:src="@drawable/abc_ic_ab_back_mtrl_am_alpha"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/actionBarInstagramLogo"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp"
+        android:src="@drawable/instagram_logo" />
+
+    <instagramdemo.arutha.com.CustomComponents.InstagramEditText
+        android:id="@+id/actionBarSearchEdit"
+        android:layout_width="30dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:background="@null"
+        android:drawableLeft="@drawable/abc_ic_search_api_mtrl_alpha"
+        android:singleLine="true"
+        android:textColor="@color/white"
+        android:textSize="14sp" />
+
+
+</RelativeLayout>

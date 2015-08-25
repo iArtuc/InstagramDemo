@@ -3,6 +3,7 @@ package instagramdemo.arutha.com.InstagramAuthorize;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,12 +13,12 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import instagramdemo.arutha.com.instagramdemo.BaseFragment;
+import instagramdemo.arutha.com.instagramdemo.InstagramDemoMainFragment;
 import instagramdemo.arutha.com.instagramdemo.R;
 import instagramdemo.arutha.com.utils.ApplicationConstants;
 
 
-public class InstagramAutho extends BaseFragment {
+public class InstagramAutho extends Activity {
 
     private InstagramApp mApp;
     private Button btnConnect;
@@ -26,31 +27,27 @@ public class InstagramAutho extends BaseFragment {
     private ViewGroup overallContainer;
     private LayoutInflater overallInflater;
 
-    View view;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        setOverallInflater(inflater);
-        setOverallContainer(container);
-        view = inflater
-                .inflate(R.layout.main, container, false);
-//        setContentView(R.layout.main);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
-        mApp = new InstagramApp(getActivity(), ApplicationConstants.CLIENT_ID,
+        setContentView(R.layout.main);
+
+        mApp = new InstagramApp(InstagramAutho.this, ApplicationConstants.CLIENT_ID,
                 ApplicationConstants.CLIENT_SECRET, ApplicationConstants.CALLBACK_URL);
         mApp.setListener(listener);
 
-        tvSummary = (TextView) view.findViewById(R.id.tvSummary);
+        tvSummary = (TextView) findViewById(R.id.tvSummary);
 
-        btnConnect = (Button) view.findViewById(R.id.btnConnect);
+        btnConnect = (Button) findViewById(R.id.btnConnect);
         btnConnect.setOnClickListener(new OnClickListener() {
 
             @Override
             public void onClick(View view) {
                 if (mApp.hasAccessToken()) {
                     final AlertDialog.Builder builder = new AlertDialog.Builder(
-                            getActivity());
+                            InstagramAutho.this);
                     builder.setMessage("Disconnect from Instagram?")
                             .setCancelable(false)
                             .setPositiveButton("Yes",
@@ -82,7 +79,6 @@ public class InstagramAutho extends BaseFragment {
             btnConnect.setText("Disconnect");
         }
 
-        return view;
     }
 
     InstagramApp.OAuthAuthenticationListener listener = new InstagramApp.OAuthAuthenticationListener() {
@@ -91,11 +87,16 @@ public class InstagramAutho extends BaseFragment {
         public void onSuccess() {
             tvSummary.setText("Connected as " + mApp.getUserName());
             btnConnect.setText("Disconnect");
+
+            Intent i = new Intent(InstagramAutho.this, InstagramDemoMainFragment.class);
+            startActivity(i);
+
+
         }
 
         @Override
         public void onFail(String error) {
-            Toast.makeText(getActivity(), error, Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), error, Toast.LENGTH_SHORT).show();
         }
     };
 

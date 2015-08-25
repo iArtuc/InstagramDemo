@@ -11,7 +11,9 @@ public enum mainPageEnum {
     @SerializedName("0")
     GetToken(0),
     @SerializedName("1")
-    InstagramMainPage(1);
+    InstagramMainPage(1),
+    @SerializedName("2")
+    PopularSearchPage(2);
 
 
     private int value;

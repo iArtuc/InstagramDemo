@@ -2,6 +2,7 @@ package instagramdemo.arutha.com.instagramdemo;
 
 import android.app.ActionBar;
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.FragmentActivity;
@@ -11,6 +12,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.PopupMenu.OnMenuItemClickListener;
 
+import instagramdemo.arutha.com.CustomComponents.InstagramEditText;
+import instagramdemo.arutha.com.CustomComponents.InstagramTextView;
 import instagramdemo.arutha.com.CustomComponents.customProgressDialog;
 
 /**
@@ -20,8 +23,10 @@ public class BaseActivity extends FragmentActivity implements
         OnMenuItemClickListener {
 
     public customProgressDialog dialog;
-
-    public static ImageView ActionBarSettings;
+    private InstagramTextView ActionBarNameTextView;
+    public InstagramEditText ActionBarSearchEditText;
+    public ImageView ActionBarIcon;
+    public ImageView ActionBackImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,19 +78,14 @@ public class BaseActivity extends FragmentActivity implements
         LayoutInflater mInflater = LayoutInflater.from(this);
 
 
-//                View mCustomView = mInflater.inflate(R.layout.actionbar_layout, null);
-//                ActionBarNameTextView = (AheTextView) mCustomView.findViewById(R.id.textViewActionBarName);
-//                ActionBarSettings = (ImageView) mCustomView.findViewById(R.id.imageViewAheSettings);
-//
-//                ActionBarSettings.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        Intent intent = new Intent(getApplicationContext(), SettingsPage.class);
-//                        startActivity(intent);
-//                    }
-//                });
-//                mActionBar.setCustomView(mCustomView);
-//                break;
+        View mCustomView = mInflater.inflate(R.layout.actionbar_layout, null);
+        ActionBarSearchEditText = (InstagramEditText) mCustomView.findViewById(R.id.actionBarSearchEdit);
+        ActionBarIcon = (ImageView) mCustomView.findViewById(R.id.actionBarInstagramLogo);
+        ActionBackImage = (ImageView) mCustomView.findViewById(R.id.actionBarBackImage);
+//        ActionBarNameTextView = (InstagramTextView) mCustomView.findViewById(R.id.textViewActionBarName);
+//        ActionBarSettings = (ImageView) mCustomView.findViewById(R.id.imageViewAheSettings);
+
+        mActionBar.setCustomView(mCustomView);
 
 
         mActionBar.setDisplayShowCustomEnabled(true);
