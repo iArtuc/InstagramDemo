@@ -3,6 +3,7 @@ package instagramdemo.arutha.com.instagramdemo;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
@@ -31,6 +32,7 @@ import instagramdemo.arutha.com.InstagramEnums.dialogTypeEnum;
 import instagramdemo.arutha.com.InstagramEnums.mainPageEnum;
 import instagramdemo.arutha.com.Interfaces.AdapterClickListener;
 import instagramdemo.arutha.com.Interfaces.InstagramRespinseStatusListener;
+import instagramdemo.arutha.com.Interfaces.PhotosAdapterClickListener;
 import instagramdemo.arutha.com.flows.BusinessService;
 import instagramdemo.arutha.com.flows.InstagramApplication;
 import instagramdemo.arutha.com.flows.InstagramMainPageFlow;
@@ -86,16 +88,28 @@ public class InstagramDemoMainFragment extends BaseActivity {
 
     private void initLayout() {
 
-        myGridAdapter = new MyGridAdapter(getApplicationContext());
+        myGridAdapter = new MyGridAdapter(getApplicationContext(), new PhotosAdapterClickListener() {
+            @Override
+            public void itemClick(Bitmap obj) {
+                Log.d("imageClicked", "yolo");
+                if (obj != null) {
+                    zoomView.bringToFront();
+                    zoomView.setImageBitmap(obj);
+                    photoClicked = true;
+                }
+            }
+        });
 
         zoomView = (ZoomCustomImageView) findViewById(R.id.zoomView);
 
 
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerViewMainFragment);
+
         mRecyclerView.setHasFixedSize(true);
 
 
         mSwipeRefresh = (SwipeRefreshLayout) findViewById(R.id.swipe_container_MainFragment);
+
         mSwipeRefresh.setColorSchemeColors(getResources().getColor(R.color.Blue), getResources().getColor(R.color.Red), getResources().getColor(R.color.Orange));
         mSwipeRefresh.bringToFront();
 
@@ -413,7 +427,6 @@ public class InstagramDemoMainFragment extends BaseActivity {
         }
 
     }
-
 
 
 }

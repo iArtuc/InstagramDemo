@@ -20,7 +20,7 @@ import android.widget.ImageView;
 
 public class ZoomCustomImageView extends ImageView implements OnTouchListener {
     private Context mContext;
-    private float MAX_SCALE = 2f;
+    private float MAX_SCALE = 5f;
 
     private Matrix mMatrix;
     private final float[] mMatrixValues = new float[9];

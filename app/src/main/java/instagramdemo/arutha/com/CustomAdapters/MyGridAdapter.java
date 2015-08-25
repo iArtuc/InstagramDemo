@@ -1,6 +1,8 @@
 package instagramdemo.arutha.com.CustomAdapters;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.util.Log;
@@ -16,6 +18,7 @@ import com.squareup.picasso.Picasso.Builder;
 import java.util.ArrayList;
 import java.util.List;
 
+import instagramdemo.arutha.com.Interfaces.PhotosAdapterClickListener;
 import instagramdemo.arutha.com.instagramdemo.R;
 
 /**
@@ -27,10 +30,13 @@ public class MyGridAdapter extends RecyclerView.Adapter {
     private List<String> imageUrls = new ArrayList<>();
     private List<Float> ratios = new ArrayList<>();
 
+    private PhotosAdapterClickListener listener;
+
     Picasso p;
 
-    public MyGridAdapter(Context context) {
+    public MyGridAdapter(Context context, PhotosAdapterClickListener photosAdapterClickListener) {
         mContext = context;
+        this.listener = photosAdapterClickListener;
         try {
             Picasso p = new Builder(mContext)
                     .memoryCache(new LruCache(24000))
@@ -55,11 +61,24 @@ public class MyGridAdapter extends RecyclerView.Adapter {
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder viewHolder, int position) {
+    public void onBindViewHolder(final ViewHolder viewHolder, int position) {
         MyViewHolder vh = (MyViewHolder) viewHolder;
         vh.positionTextView.setText("pos: " + position);
         vh.imageView.setRatio(ratios.get(position));
         Picasso.with(mContext).load(imageUrls.get(position)).placeholder(PlaceHolderDrawableHelper.getBackgroundDrawable(position)).into(vh.imageView);
+        vh.rootViewHolder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bitmap tmpBitmap = null;
+                try {
+                    tmpBitmap = ((BitmapDrawable) ((MyViewHolder) viewHolder).imageView.getDrawable()).getBitmap();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                listener.itemClick(tmpBitmap);
+            }
+        });
     }
 
     @Override
@@ -78,7 +97,6 @@ public class MyGridAdapter extends RecyclerView.Adapter {
         float ratio = (float) height / (float) width;
         ratios.add(ratio);
     }
-
 
 
 }
