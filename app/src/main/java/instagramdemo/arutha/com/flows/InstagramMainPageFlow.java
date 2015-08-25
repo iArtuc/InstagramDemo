@@ -1,7 +1,6 @@
 package instagramdemo.arutha.com.flows;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.google.gson.Gson;
 
@@ -65,7 +64,7 @@ public class InstagramMainPageFlow {
         if (obj != null && obj.getMediaList() != null) {
             ArrayList<String> tmpURL = new ArrayList<String>();
             for (int i = 0; i < obj.getMediaList().size(); i++) {
-                tmpURL.add(obj.getMediaList().get(i).getLink());
+                tmpURL.add(obj.getMediaList().get(i).getImages().getStandardResolution().getUrl());
             }
             setPhotosUrl(tmpURL);
         }
@@ -93,7 +92,7 @@ public class InstagramMainPageFlow {
 
                 listener.Fail();
             }
-        }, RequestMethodEnum.getTag, BService.getAccessToken(), tag);
+        }, RequestMethodEnum.getTag, BService.getAccessToken(), tag, null);
 
 //        new myasyncclass().execute();
 
@@ -145,7 +144,7 @@ public class InstagramMainPageFlow {
 
                 listener.Fail();
             }
-        }, RequestMethodEnum.getPopular, BService.getAccessToken(), null);
+        }, RequestMethodEnum.getPopular, BService.getAccessToken(), null, null);
 
 //        new myasyncclass().execute();
 
