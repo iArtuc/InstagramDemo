@@ -31,12 +31,17 @@ public class MyGridAdapter extends RecyclerView.Adapter {
 
     public MyGridAdapter(Context context) {
         mContext = context;
-        Picasso p = new Builder(mContext)
-                .memoryCache(new LruCache(24000))
-                .build();
-        p.setIndicatorsEnabled(true);
-        p.setLoggingEnabled(true);
-        Picasso.setSingletonInstance(p);
+        try {
+            Picasso p = new Builder(mContext)
+                    .memoryCache(new LruCache(24000))
+                    .build();
+            p.setIndicatorsEnabled(true);
+            p.setLoggingEnabled(true);
+            Picasso.setSingletonInstance(p);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     @Override
@@ -62,10 +67,18 @@ public class MyGridAdapter extends RecyclerView.Adapter {
         return ratios.size();
     }
 
+    public void clearAdapter() {
+        imageUrls.clear();
+        ratios.clear();
+    }
+
     public void addDrawable(String imageUrl, int width, int height) {
         Log.d("POH", imageUrl);
         imageUrls.add(imageUrl);
         float ratio = (float) height / (float) width;
         ratios.add(ratio);
     }
+
+
+
 }

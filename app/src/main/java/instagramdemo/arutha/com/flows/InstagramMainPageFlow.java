@@ -30,6 +30,9 @@ public class InstagramMainPageFlow {
     private String nextURL;
 
 
+    private String tagForSearch;
+
+
     private static InstagramMainPageFlow mInstance = null;
 
 
@@ -58,7 +61,12 @@ public class InstagramMainPageFlow {
 
     private void setTagPhotosObjects(RecentByTag obj) {
         if (obj != null && obj.getPagination() != null) {
-            setNextURL(obj.getPagination().getNextUrl());
+
+            if (obj.getPagination().getNextUrl().contains("max_tag_id=")) {
+                setNextURL(obj.getPagination().getNextUrl().split("max_tag_id=")[1]);
+            }
+//            setNextURL(obj.getPagination().getNextUrl());
+
         }
 
         if (obj != null && obj.getMediaList() != null) {
@@ -92,7 +100,7 @@ public class InstagramMainPageFlow {
 
                 listener.Fail();
             }
-        }, RequestMethodEnum.getTag, BService.getAccessToken(), tag, null);
+        }, RequestMethodEnum.getTag, BService.getAccessToken(), tag, nextURL);
 
 //        new myasyncclass().execute();
 
@@ -195,5 +203,13 @@ public class InstagramMainPageFlow {
 
     public void setNextURL(String nextURL) {
         this.nextURL = nextURL;
+    }
+
+    public String getTagForSearch() {
+        return tagForSearch;
+    }
+
+    public void setTagForSearch(String tagForSearch) {
+        this.tagForSearch = tagForSearch;
     }
 }

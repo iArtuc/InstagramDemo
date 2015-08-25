@@ -11,9 +11,11 @@ public enum mainPageEnum {
     @SerializedName("0")
     GetToken(0),
     @SerializedName("1")
-    InstagramMainPage(1),
+    getPhotosWithTag(1),
     @SerializedName("2")
-    PopularSearchPage(2);
+    getPhotosWithTagPaging(2),
+    @SerializedName("3")
+    PopularSearchPage(3);
 
 
     private int value;
