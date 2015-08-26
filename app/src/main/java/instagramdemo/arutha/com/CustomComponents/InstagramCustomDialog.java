@@ -7,7 +7,6 @@ import android.view.Window;
 import android.widget.RelativeLayout;
 
 import instagramdemo.arutha.com.InstagramEnums.dialogTypeEnum;
-import instagramdemo.arutha.com.instagramdemo.InstagramDemoMainFragment;
 import instagramdemo.arutha.com.instagramdemo.R;
 
 /**

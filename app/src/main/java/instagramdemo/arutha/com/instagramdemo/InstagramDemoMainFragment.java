@@ -54,13 +54,12 @@ public class InstagramDemoMainFragment extends BaseActivity {
     private RecyclerView mRecyclerView;
     private SwipeRefreshLayout mSwipeRefresh;
     private PopularSearchAdapter mAdapter;
-    private PhotosAdapter photoAdapter;
     private MyGridAdapter myGridAdapter;
 
     private ZoomCustomImageView zoomView;
 
     private GridLayoutManager gridLayoutManager;
-
+    private LinearLayoutManager mLayoutManager;
 
     private boolean ifSearchOpen = false;
     private boolean photoClicked = false;
@@ -104,7 +103,8 @@ public class InstagramDemoMainFragment extends BaseActivity {
 
 
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerViewMainFragment);
-
+        mLayoutManager = new LinearLayoutManager(getApplicationContext());
+        mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setHasFixedSize(true);
 
 
@@ -119,9 +119,11 @@ public class InstagramDemoMainFragment extends BaseActivity {
 
     private void getPhotosWithPaging() {
 
+        showInstagramDialog();
         instagramMainPageFlow.getTagPhotosRequest(new InstagramRespinseStatusListener() {
             @Override
             public void Success() {
+                dismissInstagramDialog();
                 Log.d("tagPhotos", "OK");
                 setmRecyclerViewAdapter(mainPageEnum.getPhotosWithTagPaging);
             }
@@ -135,6 +137,7 @@ public class InstagramDemoMainFragment extends BaseActivity {
 
     private void getPhotosWithTag(String tag) {
 
+        showInstagramDialog();
         if (tag == null) {
             instagramMainPageFlow.setTagForSearch("hipo");
         } else {
@@ -143,18 +146,20 @@ public class InstagramDemoMainFragment extends BaseActivity {
         instagramMainPageFlow.getTagPhotosRequest(new InstagramRespinseStatusListener() {
             @Override
             public void Success() {
+                dismissInstagramDialog();
                 Log.d("tagPhotos", "OK");
                 setmRecyclerViewAdapter(mainPageEnum.getPhotosWithTag);
             }
 
             @Override
             public void Fail() {
-
+                dismissInstagramDialog();
             }
         }, instagramMainPageFlow.getTagForSearch());
     }
 
     private void getPopularSearches() {
+        showInstagramDialog();
         instagramMainPageFlow.getPopularTags(new InstagramRespinseStatusListener() {
             @Override
             public void Success() {
@@ -166,6 +171,7 @@ public class InstagramDemoMainFragment extends BaseActivity {
 
             @Override
             public void Fail() {
+                dismissInstagramDialog();
                 Log.d("popularTagRequest", "Fail");
             }
         });
@@ -241,7 +247,7 @@ public class InstagramDemoMainFragment extends BaseActivity {
             case PopularSearchPage:
                 ifSearchOpen = true;
                 instagramMainPageFlow.setNextURL(null);
-                LinearLayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+                mLayoutManager = new LinearLayoutManager(getApplicationContext());
                 mRecyclerView.setLayoutManager(mLayoutManager);
                 mAdapter = new PopularSearchAdapter(getApplicationContext(), instagramMainPageFlow.getPopularSearches(), new AdapterClickListener() {
                     @Override
@@ -420,10 +426,7 @@ public class InstagramDemoMainFragment extends BaseActivity {
                 Log.d("CDA", "onBackPressed Called");
             }
             new InstagramCustomDialog(this, dialogTypeEnum.LogoutDialog, null);
-//        Intent setIntent = new Intent(Intent.ACTION_MAIN);
-//        setIntent.addCategory(Intent.CATEGORY_HOME);
-//        setIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//        startActivity(setIntent);
+
         }
 
     }

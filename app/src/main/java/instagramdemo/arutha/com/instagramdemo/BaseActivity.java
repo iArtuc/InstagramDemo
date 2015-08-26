@@ -37,7 +37,7 @@ public class BaseActivity extends FragmentActivity implements
 
     }
 
-    public void showAHEDialog() {
+    public void showInstagramDialog() {
 
         if (dialog == null) {
             dialog = new customProgressDialog(this);
@@ -52,12 +52,12 @@ public class BaseActivity extends FragmentActivity implements
                     dialog.dismiss();
                 }
             }
-        }, 15000);
+        }, 30000);
 
     }
 
 
-    public void dismissAheDialog() {
+    public void dismissInstagramDialog() {
         if (dialog != null) {
             try {
                 dialog.hide();
