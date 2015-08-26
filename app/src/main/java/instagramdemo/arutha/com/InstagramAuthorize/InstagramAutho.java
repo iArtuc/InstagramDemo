@@ -1,6 +1,5 @@
 package instagramdemo.arutha.com.InstagramAuthorize;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -13,12 +12,14 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import instagramdemo.arutha.com.InstagramEnums.ActionBarTypeEnum;
+import instagramdemo.arutha.com.instagramdemo.BaseActivity;
 import instagramdemo.arutha.com.instagramdemo.InstagramDemoMainFragment;
 import instagramdemo.arutha.com.instagramdemo.R;
 import instagramdemo.arutha.com.utils.ApplicationConstants;
 
 
-public class InstagramAutho extends Activity {
+public class InstagramAutho extends BaseActivity {
 
     private InstagramApp mApp;
     private Button btnConnect;
@@ -33,6 +34,7 @@ public class InstagramAutho extends Activity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.main);
+        setActionBar(ActionBarTypeEnum.beforeLogin);
 
         mApp = new InstagramApp(InstagramAutho.this, ApplicationConstants.CLIENT_ID,
                 ApplicationConstants.CLIENT_SECRET, ApplicationConstants.CALLBACK_URL);

@@ -28,6 +28,7 @@ import instagramdemo.arutha.com.CustomAdapters.MyGridAdapter;
 import instagramdemo.arutha.com.CustomAdapters.PopularSearchAdapter;
 import instagramdemo.arutha.com.CustomComponents.InstagramCustomDialog;
 import instagramdemo.arutha.com.CustomComponents.InstagramEditText;
+import instagramdemo.arutha.com.InstagramEnums.ActionBarTypeEnum;
 import instagramdemo.arutha.com.InstagramEnums.dialogTypeEnum;
 import instagramdemo.arutha.com.InstagramEnums.mainPageEnum;
 import instagramdemo.arutha.com.Interfaces.AdapterClickListener;
@@ -67,6 +68,9 @@ public class InstagramDemoMainFragment extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.instagram_main_fragment);
 
+
+        setActionBar(ActionBarTypeEnum.AfterLogin);
+        setSlidingMenu();
 
         BService = ((InstagramApplication) getApplication()).getBusinessService();
         instagramMainPageFlow = InstagramMainPageFlow.getInstance(getApplicationContext(), BService);

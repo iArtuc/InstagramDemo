@@ -15,6 +15,7 @@ import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import instagramdemo.arutha.com.CustomComponents.InstagramEditText;
 import instagramdemo.arutha.com.CustomComponents.InstagramTextView;
 import instagramdemo.arutha.com.CustomComponents.customProgressDialog;
+import instagramdemo.arutha.com.InstagramEnums.ActionBarTypeEnum;
 
 /**
  * Created by ilkinartuc on 23/08/15.
@@ -34,9 +35,7 @@ public class BaseActivity extends FragmentActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // setContentView(R.layout.base_fragment);
-        //setActionBar();
-        setActionBar();
-        setSlidingMenu();
+
 
     }
 
@@ -92,7 +91,7 @@ public class BaseActivity extends FragmentActivity implements
     }
 
 
-    public void setActionBar() {
+    public void setActionBar(ActionBarTypeEnum enmVal) {
         // TODO Auto-generated method stub
         //getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
         ActionBar mActionBar = getActionBar();
@@ -113,6 +112,16 @@ public class BaseActivity extends FragmentActivity implements
 
 
         mActionBar.setDisplayShowCustomEnabled(true);
+
+
+        switch (enmVal) {
+            case AfterLogin:
+                ActionBarSearchEditText.setVisibility(View.VISIBLE);
+                break;
+            case beforeLogin:
+                ActionBarSearchEditText.setVisibility(View.INVISIBLE);
+                break;
+        }
     }
 
 
