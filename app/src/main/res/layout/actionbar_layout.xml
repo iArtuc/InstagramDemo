@@ -22,7 +22,7 @@
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
         android:layout_marginLeft="10dp"
-        android:src="@drawable/instagram_logo" />
+        android:src="@drawable/instagramlogo" />
 
     <instagramdemo.arutha.com.CustomComponents.InstagramEditText
         android:id="@+id/actionBarSearchEdit"

@@ -1,8 +1,6 @@
 package instagramdemo.arutha.com.instagramdemo;
 
 import android.app.ActionBar;
-import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.FragmentActivity;
@@ -11,6 +9,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.PopupMenu.OnMenuItemClickListener;
+
+import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 
 import instagramdemo.arutha.com.CustomComponents.InstagramEditText;
 import instagramdemo.arutha.com.CustomComponents.InstagramTextView;
@@ -21,6 +21,8 @@ import instagramdemo.arutha.com.CustomComponents.customProgressDialog;
  */
 public class BaseActivity extends FragmentActivity implements
         OnMenuItemClickListener {
+
+    public static SlidingMenu slidingMenu;
 
     public customProgressDialog dialog;
     private InstagramTextView ActionBarNameTextView;
@@ -34,6 +36,7 @@ public class BaseActivity extends FragmentActivity implements
         // setContentView(R.layout.base_fragment);
         //setActionBar();
         setActionBar();
+        setSlidingMenu();
 
     }
 
@@ -67,6 +70,27 @@ public class BaseActivity extends FragmentActivity implements
             }
         }
     }
+
+
+    public void setSlidingMenu() {
+
+        // TODO Auto-generated method stub
+        // TODO Auto-generated method stub
+        slidingMenu = new SlidingMenu(this);
+        slidingMenu.setMode(SlidingMenu.LEFT);
+        slidingMenu.setTouchModeAbove(SlidingMenu.LEFT);
+        // slidingMenu.setShadowWidthRes(R.dimen.slidingmenu_shadow_width);
+        // slidingMenu.setShadowDrawable(R.drawable.slidingmenu_shadow);
+        slidingMenu.setBehindOffsetRes(R.dimen.slidingmenu_offset);
+        slidingMenu.setFadeDegree(0.35f);
+        slidingMenu.attachToActivity(this, SlidingMenu.SLIDING_WINDOW);
+        // slidingMenu.setClickable(true);
+        slidingMenu.setMenu(R.layout.slidingmenu);
+
+        getActionBar().setDisplayHomeAsUpEnabled(false);
+
+    }
+
 
     public void setActionBar() {
         // TODO Auto-generated method stub

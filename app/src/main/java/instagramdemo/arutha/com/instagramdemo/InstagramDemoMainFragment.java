@@ -23,7 +23,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import instagramdemo.arutha.com.CustomAdapters.MyGridAdapter;
-import instagramdemo.arutha.com.CustomAdapters.PhotosAdapter;
 import instagramdemo.arutha.com.CustomAdapters.PopularSearchAdapter;
 import instagramdemo.arutha.com.CustomComponents.InstagramCustomDialog;
 import instagramdemo.arutha.com.CustomComponents.InstagramEditText;
@@ -71,7 +70,7 @@ public class InstagramDemoMainFragment extends BaseActivity {
 
 
         BService = ((InstagramApplication) getApplication()).getBusinessService();
-        instagramMainPageFlow = instagramMainPageFlow.getInstance(getApplicationContext(), BService);
+        instagramMainPageFlow = InstagramMainPageFlow.getInstance(getApplicationContext(), BService);
         String AccessTokenTmp = PreferenceConnector.readString(getApplicationContext(), ApplicationConstants.API_ACCESS_TOKEN, null);
         BService.setAccessToken(AccessTokenTmp);
 
@@ -119,11 +118,11 @@ public class InstagramDemoMainFragment extends BaseActivity {
 
     private void getPhotosWithPaging() {
 
-        showInstagramDialog();
+//        showInstagramDialog();
         instagramMainPageFlow.getTagPhotosRequest(new InstagramRespinseStatusListener() {
             @Override
             public void Success() {
-                dismissInstagramDialog();
+//                dismissInstagramDialog();
                 Log.d("tagPhotos", "OK");
                 setmRecyclerViewAdapter(mainPageEnum.getPhotosWithTagPaging);
             }
