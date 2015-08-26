@@ -19,8 +19,4 @@
     </android.support.v4.widget.SwipeRefreshLayout>
 
 
-    <instagramdemo.arutha.com.CustomComponents.ZoomCustomImageView
-        android:id="@+id/zoomView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
 </RelativeLayout>

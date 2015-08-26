@@ -12,7 +12,6 @@ import instagramdemo.arutha.com.instagramdemo.R;
  */
 public class MyViewHolder extends ViewHolder {
     public DynamicHeightImageView imageView;
-    public TextView positionTextView;
     public View rootViewHolder;
 
     public MyViewHolder(View itemView) {

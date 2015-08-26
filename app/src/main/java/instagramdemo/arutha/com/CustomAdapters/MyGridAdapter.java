@@ -55,7 +55,6 @@ public class MyGridAdapter extends RecyclerView.Adapter {
         View itemView = LayoutInflater.from(mContext).inflate(R.layout.resizable_grid_item, null);
         MyViewHolder holder = new MyViewHolder(itemView);
         holder.imageView = (DynamicHeightImageView) itemView.findViewById(R.id.dynamic_height_image_view);
-        holder.positionTextView = (TextView) itemView.findViewById(R.id.item_position_view);
         itemView.setTag(holder);
         return holder;
     }
@@ -63,7 +62,6 @@ public class MyGridAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(final ViewHolder viewHolder, int position) {
         MyViewHolder vh = (MyViewHolder) viewHolder;
-        vh.positionTextView.setText("pos: " + position);
         vh.imageView.setRatio(ratios.get(position));
         Picasso.with(mContext).load(imageUrls.get(position)).placeholder(PlaceHolderDrawableHelper.getBackgroundDrawable(position)).into(vh.imageView);
         vh.rootViewHolder.setOnClickListener(new View.OnClickListener() {
@@ -92,7 +90,6 @@ public class MyGridAdapter extends RecyclerView.Adapter {
     }
 
     public void addDrawable(String imageUrl, int width, int height) {
-        Log.d("POH", imageUrl);
         imageUrls.add(imageUrl);
         float ratio = (float) height / (float) width;
         ratios.add(ratio);

@@ -11,7 +11,6 @@ public class ApplicationConstants {
     public static String CALLBACKURL = "Your Redirect URI";
 
 
-
     public static final String CLIENT_ID = "a6f624381e5e4a9282e9a66161599b28";
     public static final String CLIENT_SECRET = "566d927f92e046b7b3c1fed4d3dbbd2a";
     public static final String CALLBACK_URL = "https://annakaramela.wordpress.com";
@@ -24,5 +23,8 @@ public class ApplicationConstants {
     public static final String API_ACCESS_TOKEN = "access_token";
 
     public static final boolean LOG = true;
+
+    public static int ScreenWidth = 0;
+    public static int ScreenHeight = 0;
 
 }

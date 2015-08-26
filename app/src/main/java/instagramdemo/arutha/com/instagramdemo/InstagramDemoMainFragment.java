@@ -4,6 +4,7 @@ import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
@@ -12,6 +13,7 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Display;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,7 +28,6 @@ import instagramdemo.arutha.com.CustomAdapters.MyGridAdapter;
 import instagramdemo.arutha.com.CustomAdapters.PopularSearchAdapter;
 import instagramdemo.arutha.com.CustomComponents.InstagramCustomDialog;
 import instagramdemo.arutha.com.CustomComponents.InstagramEditText;
-import instagramdemo.arutha.com.CustomComponents.ZoomCustomImageView;
 import instagramdemo.arutha.com.InstagramEnums.dialogTypeEnum;
 import instagramdemo.arutha.com.InstagramEnums.mainPageEnum;
 import instagramdemo.arutha.com.Interfaces.AdapterClickListener;
@@ -55,13 +56,11 @@ public class InstagramDemoMainFragment extends BaseActivity {
     private PopularSearchAdapter mAdapter;
     private MyGridAdapter myGridAdapter;
 
-    private ZoomCustomImageView zoomView;
 
     private GridLayoutManager gridLayoutManager;
     private LinearLayoutManager mLayoutManager;
 
     private boolean ifSearchOpen = false;
-    private boolean photoClicked = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,19 +85,16 @@ public class InstagramDemoMainFragment extends BaseActivity {
 
     private void initLayout() {
 
+
         myGridAdapter = new MyGridAdapter(getApplicationContext(), new PhotosAdapterClickListener() {
             @Override
             public void itemClick(Bitmap obj) {
                 Log.d("imageClicked", "yolo");
                 if (obj != null) {
-                    zoomView.bringToFront();
-                    zoomView.setImageBitmap(obj);
-                    photoClicked = true;
+                    new InstagramCustomDialog(InstagramDemoMainFragment.this, dialogTypeEnum.FullSizePictureDialog, null, obj);
                 }
             }
         });
-
-        zoomView = (ZoomCustomImageView) findViewById(R.id.zoomView);
 
 
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerViewMainFragment);
@@ -177,6 +173,15 @@ public class InstagramDemoMainFragment extends BaseActivity {
     }
 
     private void ClickListeners() {
+
+        ActionBarIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                slidingMenu.toggle();
+            }
+        });
+
+
         ActionBackImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -265,15 +270,6 @@ public class InstagramDemoMainFragment extends BaseActivity {
                 break;
             case getPhotosWithTag:
                 ifSearchOpen = false;
-//                photoAdapter = new PhotosAdapter(getApplicationContext(), instagramMainPageFlow.getPhotosUrl(), new PhotosAdapterClickListener() {
-//                    @Override
-//                    public void itemClick(Bitmap obj) {
-//                        Log.d("imageClicked", "yolo");
-//                        zoomView.bringToFront();
-//                        zoomView.setImageBitmap(obj);
-//                        photoClicked = true;
-//                    }
-//                });
 
 
                 myGridAdapter.clearAdapter();
@@ -283,14 +279,8 @@ public class InstagramDemoMainFragment extends BaseActivity {
                 }
                 gridLayoutManager = new GridLayoutManager(getApplicationContext(), 2);
                 mRecyclerView.setLayoutManager(gridLayoutManager);
-//                mRecyclerView.addItemDecoration(new MarginDecoration(this));
-//                mRecyclerView.addItemDecoration(new GridSpacingItemDecoration(2, 50, false));
-//                mRecyclerView.setAdapter(photoAdapter);
-
                 mRecyclerView.setAdapter(myGridAdapter);
-
                 mSwipeRefresh.setRefreshing(false);
-
 
                 mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
                     @Override
@@ -309,9 +299,7 @@ public class InstagramDemoMainFragment extends BaseActivity {
                         }
                     }
                 });
-//                mAdapter = new PopularSearchAdapter(getApplicationContext(), BService.getPopularSearches());
-//                mRecyclerView.setAdapter(mAdapter);
-//                mSwipeRefresh.setRefreshing(false);
+
                 break;
             case getPhotosWithTagPaging:
                 int start = myGridAdapter.getItemCount();
@@ -412,22 +400,30 @@ public class InstagramDemoMainFragment extends BaseActivity {
 
     @Override
     public void onBackPressed() {
-        if (photoClicked) {
-            mSwipeRefresh.bringToFront();
-            photoClicked = false;
-        }
+
 
         if (ActionBarSearchEditText.hasFocus()) {
             ActionBarSearchEditText.clearFocus();
 
-        } else if (!photoClicked) {
+        } else {
             if (ApplicationConstants.LOG) {
                 Log.d("CDA", "onBackPressed Called");
             }
-            new InstagramCustomDialog(this, dialogTypeEnum.LogoutDialog, null);
+            new InstagramCustomDialog(this, dialogTypeEnum.LogoutDialog, null, null);
 
         }
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        Display display = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        ApplicationConstants.ScreenWidth = size.x;
+        ApplicationConstants.ScreenHeight = size.y;
     }
 
 

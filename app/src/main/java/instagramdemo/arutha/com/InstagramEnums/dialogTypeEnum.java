@@ -11,14 +11,12 @@ public enum dialogTypeEnum {
     @SerializedName("0")
     LogoutDialog(0),
     @SerializedName("1")
-    OneButtonDialog(1),
-    @SerializedName("2")
-    CallDialog(2);
+    FullSizePictureDialog(1);
 
 
     private int value;
 
-    private dialogTypeEnum(int value) {
+    dialogTypeEnum(int value) {
         this.value = value;
     }
 
